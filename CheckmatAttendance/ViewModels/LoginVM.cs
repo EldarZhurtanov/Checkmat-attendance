@@ -21,7 +21,7 @@ namespace CheckmatAttendance.ViewModels
 
         public string Login { get; set; }
         public string Password { get; set; }
-        public static string Error { get; set; };
+        public static string Error { get; set; }
         public DelegateCommand LoginCommand;
 
         private Action _loginAction = new Action(() =>
