@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CheckmatAttendance.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,20 @@ namespace CheckmatAttendance.Views
         public Login()
         {
             InitializeComponent();
+            if (DataContext is LoginVM)
+                (DataContext as LoginVM).HarvestPassword += (sender, args) => args.Password = PasswordBox.Password;
+        }
+
+        private bool _isСleared = false;
+        private void TextBoxPassword_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (!_isСleared)
+                if (sender is PasswordBox)
+                {
+                    (sender as PasswordBox).Password = string.Empty;
+                    _isСleared = true;
+                }
         }
     }
+
 }

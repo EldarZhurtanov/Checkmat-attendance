@@ -4,41 +4,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CheckmatAttendance.Views"
+             xmlns:ViewModel="clr-namespace:CheckmatAttendance.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="692.161" d:DesignWidth="1047.881">
+             d:DesignHeight="534.661" d:DesignWidth="932.381"
+             DataContext="ViewModel:LoginVM">
     <Grid>
+        <Grid>
         <Grid.Background>
             <LinearGradientBrush>
                 <GradientStop Color="{StaticResource SocketGreen}" Offset="0" />
                 <GradientStop Color="{StaticResource SocketBlue}" Offset="1" />
             </LinearGradientBrush>
         </Grid.Background>
-        <StackPanel>
-            <Label Typography.Capitals="AllSmallCaps" HorizontalAlignment="Center" FontSize="49" Foreground="White" Margin="0,130,0,0">
-                Account login
-            </Label>
-            <TextBox MaxLength="30" x:Name="TexBoxUsername" Width="300" Padding="15" FontSize="16" Text="Username" Foreground="{StaticResource SocketGreyBrush }" Margin="0,20,0,0" />
-            <PasswordBox x:Name="TextBoxPassword" Width="300" Padding="15" FontSize="16" Password="password" Foreground="{StaticResource SocketGreyBrush }" Margin="0,20,0,0"/>
-            <Button Padding="0,25" FontSize="18" FontWeight="Bold"  Margin="0,20,0,0" Opacity="0.85" Click="Button_Click" Width="300">
-                <Button.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="#FFFA5457" Offset="0"/>
-                        <GradientStop Color="#FFFA8925" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-                <Button.Foreground>
-                    <SolidColorBrush Color="White"/>
-                </Button.Foreground>
-                LOGIN
-            </Button>
-            <Label HorizontalAlignment="Center" Margin="0,15,0,0"  FontSize="16">
-                <Hyperlink Click="Hyperlink_Click" Foreground="White" TextDecorations="None">
-                    Registration
-                </Hyperlink>
-            </Label>
-            <Label HorizontalAlignment="Center" Margin="0,15,0,0"  FontSize="16" Name="ErrorLabel" Foreground="{StaticResource SocketRedBrush}">
-
-            </Label>
-        </StackPanel>
+        <Grid MaxWidth="500" VerticalAlignment="Center">
+            <StackPanel>
+                <Label Typography.Capitals="AllSmallCaps" HorizontalAlignment="Center" FontSize="49" Foreground="White">
+                    <TextBlock TextWrapping="WrapWithOverflow" TextAlignment="Center">Вход для тренера</TextBlock>
+                </Label>
+                <Grid MaxWidth="300">
+                        <StackPanel>
+                            <TextBox Text="{Binding Login}" Tag="Логин" MaxLength="30" x:Name="TexBoxUsername" Padding="15" FontSize="16" Foreground="{StaticResource SocketGreyBrush }" Margin="0,20,0,0" />
+                            <PasswordBox GotFocus="TextBoxPassword_GotFocus" Password="1234556" x:Name="PasswordBox" Padding="15" FontSize="16" Foreground="{StaticResource SocketGreyBrush }" Margin="0,20,0,0"/>
+                            <Button Command="{Binding LoginCommand}" Padding="0,25" FontSize="18" FontWeight="Bold"  Margin="0,20,0,0" Opacity="0.85">
+                                <Button.Background>
+                                    <LinearGradientBrush>
+                                        <GradientStop Color="#FFFA5457" Offset="0"/>
+                                        <GradientStop Color="#FFFA8925" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                                <Button.Foreground>
+                                    <SolidColorBrush Color="White"/>
+                                </Button.Foreground>
+                                ВОЙТИ
+                            </Button>
+                            <Label Content="{Binding Error}" HorizontalAlignment="Center" Margin="0,15,0,0" MinHeight="30" FontSize="16" Name="ErrorLabel" Foreground="{StaticResource SocketRedBrush}"></Label>
+                        </StackPanel>
+                    </Grid>
+            </StackPanel>
+        </Grid>
     </Grid>
+    </Grid>
+    
 </UserControl>

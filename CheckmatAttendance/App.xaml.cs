@@ -1,4 +1,6 @@
-﻿using Egor92.UINavigation.Wpf;
+﻿using CheckmatAttendance.ViewModels;
+using CheckmatAttendance.Views;
+using Egor92.UINavigation.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -19,12 +21,9 @@ namespace CheckmatAttendance
             var window = new MainWindow();
             var navigationManager = new NavigationManager(window);
 
-            /*
-            navigationManager.Register<FirstView>("FirstKey", () => new FirstViewModel(navigationManager));
-            navigationManager.Register<SecondView>("SecondKey", () => new SecondViewModel(navigationManager));
-            */
+            navigationManager.Register<Login>("Login", () => new LoginVM(navigationManager));
 
-            navigationManager.Navigate("FirstKey");
+            navigationManager.Navigate("Login");
             window.Show();
         }
     }

@@ -23,6 +23,7 @@ namespace CheckmatAttendance
         public MainWindow()
         {
             InitializeComponent();
+
         }
     }
 }
