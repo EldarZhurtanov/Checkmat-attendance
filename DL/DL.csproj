@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C8B8FF05-8223-41B6-8726-1A361EEC221E}</ProjectGuid>
+    <ProjectGuid>{89841F11-5934-4319-B9B4-0087F874A3FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BL</RootNamespace>
-    <AssemblyName>BL</AssemblyName>
+    <RootNamespace>DL</RootNamespace>
+    <AssemblyName>DL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,16 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheckmatAuthorization.cs" />
-    <Compile Include="Training.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Interfaces\ICheckmatDataProvider.cs" />
+    <Compile Include="Models\Presence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DL\DL.csproj">
-      <Project>{89841f11-5934-4319-b9b4-0087f874a3ff}</Project>
-      <Name>DL</Name>
-    </ProjectReference>
+    <Compile Include="Models\TrainingResponce.cs" />
+    <Compile Include="Models\UserResponce.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

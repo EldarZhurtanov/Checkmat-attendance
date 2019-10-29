@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "CheckmatAttendance\UI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{C8B8FF05-8223-41B6-8726-1A361EEC221E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DL", "DL\DL.csproj", "{89841F11-5934-4319-B9B4-0087F874A3FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C8B8FF05-8223-41B6-8726-1A361EEC221E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8B8FF05-8223-41B6-8726-1A361EEC221E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8B8FF05-8223-41B6-8726-1A361EEC221E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89841F11-5934-4319-B9B4-0087F874A3FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89841F11-5934-4319-B9B4-0087F874A3FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89841F11-5934-4319-B9B4-0087F874A3FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89841F11-5934-4319-B9B4-0087F874A3FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

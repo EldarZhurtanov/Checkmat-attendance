@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public interface IUser
+    public class User
     {
-
+        public int id;
     }
 }

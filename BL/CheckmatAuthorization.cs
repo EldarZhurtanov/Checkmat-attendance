@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public abstract class ICheckmatAuthorization
+    public abstract class CheckmatAuthorization
     {
-        abstract public ICollection<ITraining> Authorization(string login, string password);
+        abstract public ICollection<Training> Authorization(string login, string password);
     }
 }
