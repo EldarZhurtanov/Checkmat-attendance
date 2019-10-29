@@ -6,35 +6,51 @@ using System.Threading.Tasks;
 using DevExpress.Mvvm;
 using Egor92.UINavigation.Abstractions;
 using BL;
+using Egor92.UINavigation.Wpf;
+using CheckmatAttendance.Views;
 
 namespace CheckmatAttendance.ViewModels
 {
     class LoginVM : ViewModelBase
     {
-        private readonly INavigationManager _navigationManager;
+        private readonly NavigationManager _navigationManager;
 
-        public LoginVM(INavigationManager navigationManager)
+        public LoginVM(NavigationManager navigationManager)
         {
             _navigationManager = navigationManager;
-            LoginCommand = new DelegateCommand(_loginAction);
+
+
+            LoginCommand = new DelegateCommand(() =>
+            {
+                try
+                {
+                    if (HarvestPassword == null)
+                        Error = "Ошибка";
+
+                    var hpeargs = new HarvestPasswordEventArgs();
+                    HarvestPassword(this, hpeargs);
+
+                    var trainings = AuthorizationService.Authorization(Login, hpeargs.Password);
+
+                    if (trainings == null)
+                        throw new Exception("У вас нет занятий");
+                    else
+                    {
+                        _navigationManager.Register<TrainingChioce>("TrainingChoice", () => new TrainingChoiceVM(navigationManager, trainings));
+                        _navigationManager.Navigate("TrainingChoice");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Error = ex.Message;
+                }
+            });
         }
 
         public string Login { get; set; }
-        public string Password { get; set; }
-        public static string Error { get; set; }
-        public DelegateCommand LoginCommand;
+        public string Error { get; set; }
+        public DelegateCommand LoginCommand { get; }
 
-        private Action _loginAction = new Action(() =>
-        {
-            try
-            {
-                /*авторизцая*/
-            }
-            catch (Exception ex)
-            { 
-                Error = ex.Message;
-            }
-        });
 
         public event EventHandler<HarvestPasswordEventArgs> HarvestPassword;
         public class HarvestPasswordEventArgs

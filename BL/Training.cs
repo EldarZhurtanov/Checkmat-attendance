@@ -23,12 +23,19 @@ namespace BL
         public User Trainer { get; }
         public DateTime TrainingDate { get; }
 
-        public abstract ObservableCollection<User> Users { get => _dataProvider.GetUsersInGroup(GroupId); }
-        public abstract bool TagUser(User user, Presence presence)
+        public ObservableCollection<User> Users { get; set; }
+        public void TagUser(User user, Presence presence)
         {
-            _dataProvider.MarkUser(user.id, Presence);
 
+            _dataProvider.MarkUser(user.Id, presence);
+
+            Users.Remove(user);
+            user.Presence = presence;
+            Users.Add(user);
         }
-        public abstract void SignUpForATrialTraining(User user); 
+        public void SignUpForATrialTraining(TrialUser trialUser)
+        {
+            _dataProvider.CreateTrialTraining(trialUser.ToResponce());
+        }
     }
 }
