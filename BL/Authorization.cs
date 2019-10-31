@@ -19,7 +19,7 @@ namespace BL
 
                 foreach (var training in trainingResponeses)
                 {
-                    trainings.Add(new Training(training.groupId, new User { Id = trainer.id }, training.trainingDate));
+                    trainings.Add(new Training(training.groupId, new User { Id = trainer.id }, training.trainingDate, training.trainingType));
                 }
 
                 return trainings;

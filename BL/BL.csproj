@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authorization.cs" />
+    <Compile Include="Converters\UserResponceToUser.cs" />
     <Compile Include="Training.cs" />
     <Compile Include="Models\TrialUser.cs" />
     <Compile Include="Models\User.cs" />

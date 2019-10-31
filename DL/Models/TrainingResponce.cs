@@ -6,5 +6,6 @@ namespace DL
     {
         public int groupId;
         public DateTime trainingDate;
+        public string trainingType;
     }
 }

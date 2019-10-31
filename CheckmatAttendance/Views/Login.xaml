@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:CheckmatAttendance.Views"
              xmlns:ViewModel="clr-namespace:CheckmatAttendance.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="534.661" d:DesignWidth="932.381"
-             DataContext="ViewModel:LoginVM">
+             d:DesignHeight="534.661" d:DesignWidth="932.381">
     <Grid>
         <Grid>
         <Grid.Background>

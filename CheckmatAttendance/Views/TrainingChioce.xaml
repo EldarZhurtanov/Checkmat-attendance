@@ -5,8 +5,56 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CheckmatAttendance.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="764.311" d:DesignWidth="1278.436">
+    <UserControl.Resources>
+        <Style TargetType="ComboBox">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=TrainigTypeBox, Path=Tag}" Value="false">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <Label>123</Label>
+        <Grid>
+            <Grid.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="{StaticResource SocketGreen}" Offset="0" />
+                    <GradientStop Color="{StaticResource SocketBlue}" Offset="1" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid MaxWidth="600" VerticalAlignment="Center">
+                <Border Background="White" Padding="15" CornerRadius="40">
+                    <StackPanel Margin="0,20,0,0">
+                        <Label Typography.Capitals="AllSmallCaps" HorizontalAlignment="Center" FontSize="49" Foreground="{StaticResource SocketGreyBrush}">
+                            <TextBlock TextWrapping="WrapWithOverflow" TextAlignment="Center">Выберите тренировку</TextBlock>
+                        </Label>
+                        <Grid MaxWidth="450">
+                            <StackPanel>
+                                <DatePicker FontSize="16" FontWeight="Bold" Foreground="{StaticResource SocketGreyBrush}" Margin="0,20,0,0" SelectedDate="{Binding SelectedDate}">
+                                </DatePicker>
+                                <TextBlock Margin="17,2,0,0" Foreground="{StaticResource SocketGreyBrush}">Дата</TextBlock>
+                                <ComboBox SelectedItem="{Binding SelectedTrainingType}" FontSize="16"  FontWeight="Bold" Foreground="{StaticResource SocketGreyBrush}" Tag="{Binding SelectedDateIsValid}" ItemsSource="{Binding TrainingTypes}" Margin="0,20,0,0" Style="{DynamicResource ComboBoxStyle}"/>
+                                <TextBlock Margin="17,2,0,0" Foreground="{StaticResource SocketGreyBrush}">Тип тренировки</TextBlock>
+
+                                <Button MaxWidth="200" Command="{Binding ChoiceTrainingCommand}" Padding="0,25" FontSize="18" FontWeight="Bold"  Margin="0,20,0,0" Opacity="0.85">
+                                    <Button.Background>
+                                        <LinearGradientBrush>
+                                            <GradientStop Color="{StaticResource SocketGreen}" Offset="0"/>
+                                            <GradientStop Color="{StaticResource SocketBlue}" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                    <Button.Foreground>
+                                        <SolidColorBrush Color="White"/>
+                                    </Button.Foreground>
+                                    ВОЙТИ
+                                </Button>
+                                <TextBlock Text="{Binding Error}" HorizontalAlignment="Center" Margin="0,15,0,0" FontSize="16" Name="ErrorLabel" Foreground="{StaticResource SocketRedBrush}"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

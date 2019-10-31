@@ -1,4 +1,5 @@
-﻿using DL;
+﻿using BL.Converters;
+using DL;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,19 +12,32 @@ namespace BL
     public class Training
     {
         private ICheckmatDataProvider _dataProvider;
+        private ObservableCollection<User> _users;
 
-        internal Training(int groupId, User trainer, DateTime trainingDate)
+        /*internal*/public Training(int groupId, User trainer, DateTime trainingDate, string trainingType)
         {
             GroupId = groupId;
             Trainer = trainer;
             TrainingDate = trainingDate;
+            TrainingType = trainingType;
         }
 
         public int GroupId { get; }
         public User Trainer { get; }
+        public string TrainingType { get; }
         public DateTime TrainingDate { get; }
 
-        public ObservableCollection<User> Users { get; set; }
+        public ObservableCollection<User> Users {
+            get
+            {
+                if (_users == null)
+                    _users = new ObservableCollection<User>((from UserResponces
+                            in _dataProvider.GetUsersInGroup(GroupId.ToString())
+                            select UserResponces.ToUser()).ToList());
+                return _users;
+            }
+        }
+
         public void TagUser(User user, Presence presence)
         {
 

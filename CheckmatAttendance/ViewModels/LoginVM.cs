@@ -33,10 +33,10 @@ namespace CheckmatAttendance.ViewModels
                     var trainings = AuthorizationService.Authorization(Login, hpeargs.Password);
 
                     if (trainings == null)
-                        throw new Exception("У вас нет занятий");
+                        Error ="У вас нет занятий";
                     else
                     {
-                        _navigationManager.Register<TrainingChioce>("TrainingChoice", () => new TrainingChoiceVM(navigationManager, trainings));
+                        _navigationManager.Register<TrainingChioce>("TrainingChoice", () => new TrainingChoiceVM(navigationManager, trainings.ToList()));
                         _navigationManager.Navigate("TrainingChoice");
                     }
                 }
