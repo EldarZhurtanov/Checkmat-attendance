@@ -8,5 +8,6 @@ namespace BL
         public Presence Presence;
         public string FirstName;
         public string MidleName;
+        public string CardNumber;
     }
 }

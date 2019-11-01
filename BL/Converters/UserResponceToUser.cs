@@ -1,9 +1,4 @@
 ﻿using DL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL.Converters
 {
@@ -14,7 +9,9 @@ namespace BL.Converters
             return new User()
             {
                 Id = userResponce.id,
-                Presence = Presence.present
+                Presence = userResponce.presence == 0 ? Presence.absent : Presence.present,
+                FirstName = userResponce.midleName,
+                MidleName = userResponce.midleName
             };
         }
 

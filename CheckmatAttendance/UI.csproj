@@ -74,9 +74,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\AttendaceCheckerVM.cs" />
+    <Compile Include="ViewModels\CreateTrialTrainingVM.cs" />
+    <Compile Include="ViewModels\Helpers\SearchFromUsers.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\TrainingChoiceVM.cs" />
     <Compile Include="ViewModels\UserMarkerVM.cs" />
+    <Compile Include="Views\AttendaceChecker.xaml.cs">
+      <DependentUpon>AttendaceChecker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -98,6 +104,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AttendaceChecker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -156,9 +166,7 @@
       <Name>DL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Styles\Helpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="3.PNG" />
   </ItemGroup>

@@ -24,19 +24,20 @@ namespace CheckmatAttendance.Views
         public Login()
         {
             InitializeComponent();
-            if (DataContext is LoginVM)
-                (DataContext as LoginVM).HarvestPassword += (sender, args) => args.Password = PasswordBox.Password;
         }
 
         private bool _isСleared = false;
         private void TextBoxPassword_GotFocus(object sender, RoutedEventArgs e)
         {
+            if (DataContext is LoginVM)
+                (DataContext as LoginVM).HarvestPassword += (send, args) => args.Password = PasswordBox.Password;
+
             if (!_isСleared)
-                if (sender is PasswordBox)
-                {
-                    (sender as PasswordBox).Password = string.Empty;
-                    _isСleared = true;
-                }
+                    if (sender is PasswordBox)
+                    {
+                        (sender as PasswordBox).Password = string.Empty;
+                        _isСleared = true;
+                    }
         }
     }
 

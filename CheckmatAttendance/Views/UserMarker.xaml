@@ -6,9 +6,6 @@
              xmlns:local="clr-namespace:CheckmatAttendance.Views"
              mc:Ignorable="d" 
              d:DesignHeight="765" d:DesignWidth="1115">
-    <UserControl.DataContext>
-        <local:test/>
-    </UserControl.DataContext>
     <Grid>
         <Image Margin="-1287,27,1255,73" Source="/CheckmatAttendance;component/3.PNG" Stretch="Fill"/>
         <Grid>
@@ -52,7 +49,7 @@
                     </Grid>
                     <Grid Grid.Row="1">
                         <ScrollViewer Background="#f5f5f5">
-                            <ListBox ItemsSource="{Binding Users}">
+                            <ListBox SelectedItem="{Binding SelectedUser}" ItemsSource="{Binding Users}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>

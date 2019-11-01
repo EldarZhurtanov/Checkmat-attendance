@@ -1,20 +1,18 @@
 ﻿using BL.Converters;
 using DL;
+using DL.DataProviders;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL
 {
     public class Training
     {
-        private ICheckmatDataProvider _dataProvider;
+        private TestDataProvider _dataProvider = new TestDataProvider();
         private ObservableCollection<User> _users;
 
-        /*internal*/public Training(int groupId, User trainer, DateTime trainingDate, string trainingType)
+        internal Training(int groupId, User trainer, DateTime trainingDate, string trainingType)
         {
             GroupId = groupId;
             Trainer = trainer;
@@ -32,7 +30,7 @@ namespace BL
             {
                 if (_users == null)
                     _users = new ObservableCollection<User>((from UserResponces
-                            in _dataProvider.GetUsersInGroup(GroupId.ToString())
+                            in _dataProvider.GetUsersInGroup(GroupId)
                             select UserResponces.ToUser()).ToList());
                 return _users;
             }
@@ -41,7 +39,7 @@ namespace BL
         public void TagUser(User user, Presence presence)
         {
 
-            _dataProvider.MarkUser(user.Id, presence);
+            _dataProvider.MarkUser(user.Id, Convert.ToBoolean((int)presence));
 
             Users.Remove(user);
             user.Presence = presence;

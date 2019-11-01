@@ -25,7 +25,10 @@ namespace CheckmatAttendance.ViewModels
                 try
                 {
                     if (HarvestPassword == null)
+                    {
                         Error = "Ошибка";
+                        return;
+                    }
 
                     var hpeargs = new HarvestPasswordEventArgs();
                     HarvestPassword(this, hpeargs);

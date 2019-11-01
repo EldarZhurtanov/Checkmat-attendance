@@ -1,6 +1,4 @@
-﻿using BL;
-using DevExpress.Mvvm;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,14 +16,13 @@ using System.Windows.Shapes;
 namespace CheckmatAttendance.Views
 {
     /// <summary>
-    /// Логика взаимодействия для UserMarker.xaml
+    /// Логика взаимодействия для AttendaceChecker.xaml
     /// </summary>
-    public partial class UserMarker : UserControl
+    public partial class AttendaceChecker : UserControl
     {
-        public UserMarker()
+        public AttendaceChecker()
         {
             InitializeComponent();
         }
-
     }
 }

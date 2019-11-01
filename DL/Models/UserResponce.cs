@@ -4,5 +4,9 @@
     {
         public string role;
         public int id;
+        public int groupId;
+        public int presence;
+        public string lastName;
+        public string midleName;
     }
 }

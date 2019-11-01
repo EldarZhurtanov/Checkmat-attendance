@@ -41,9 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataProviders\TestDataProvider.cs" />
     <Compile Include="Interfaces\ICheckmatDataProvider.cs" />
     <Compile Include="Models\TrialUserResponce.cs" />
-    <Compile Include="Models\Presence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\TrainingResponce.cs" />
     <Compile Include="Models\UserResponce.cs" />
