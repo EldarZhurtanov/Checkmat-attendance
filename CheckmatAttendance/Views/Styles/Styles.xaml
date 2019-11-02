@@ -25,7 +25,7 @@
                     <Border x:Name="border" CornerRadius="20" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                         <Grid>
                             <ScrollViewer VerticalAlignment="Center" x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                            <TextBlock VerticalAlignment="Center" Text="{TemplateBinding Tag}" IsHitTestVisible="False"  Padding="18,15,15,15" FontSize="16" Foreground="{StaticResource SocketGreyBrush }">
+                            <TextBlock VerticalAlignment="Center" Text="{TemplateBinding Tag}" IsHitTestVisible="False"  Padding="{TemplateBinding Padding}" FontSize="{TemplateBinding FontSize}" Foreground="{StaticResource SocketGreyBrush}">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Visibility" Value="Hidden"/>

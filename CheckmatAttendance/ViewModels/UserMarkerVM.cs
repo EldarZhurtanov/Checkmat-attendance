@@ -33,6 +33,7 @@ namespace CheckmatAttendance.ViewModels
             }
         }
         public int PresentUserCount { get => _users.ToList().FindAll((user) => user.Presence == Presence.present).Count; }
+        public int UserCount { get => _users.Count; }
 
         public DelegateCommand Search { get; }
         public DelegateCommand MarkUser { get; }

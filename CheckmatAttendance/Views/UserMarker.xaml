@@ -7,11 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="765" d:DesignWidth="1115">
     <Grid>
-        <Image Margin="-1287,27,1255,73" Source="/CheckmatAttendance;component/3.PNG" Stretch="Fill"/>
+        <Image Margin="-1215,48,1183,53" Source="/CheckmatAttendance;component/3.PNG" Stretch="Fill"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="14*"/>
-                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="7*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Grid>
@@ -26,21 +27,21 @@
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
-                            <Label  Grid.Row="0" VerticalAlignment="Bottom" Margin="30,0,0,10" FontSize="40" Foreground="{StaticResource SocketGreyBrush}">
+                            <Label  Grid.Row="0" VerticalAlignment="Bottom" Margin="30,0,0,10" FontSize="40" Foreground="#434343">
                                 НАЙДИТЕ СЕБЯ
                             </Label>
                             <Grid Grid.Row="1">
                                 <Grid MaxHeight="55" Margin="20,0,20,10">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="496*"/>
-                                        <ColumnDefinition Width="183*"/>
+                                        <ColumnDefinition Width="494*"/>
+                                        <ColumnDefinition Width="145*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0" Margin="0,0,5,0">
-                                        <TextBox Background="#e0e0e0" FontWeight="DemiBold" Tag="ФИО или Номер карты">
+                                    <Grid Grid.Column="0" Margin="0,0,5,10">
+                                        <TextBox Padding="15" Background="#e0e0e0" FontWeight="DemiBold" Tag="ФИО или Номер карты">
                                         </TextBox>
                                     </Grid>
-                                    <Grid Grid.Column="1" Margin="5,0,0,0">
-                                        <Button Foreground="{StaticResource SocketGreyBrush}" Background="#cccccc" FontWeight="DemiBold" FontSize="16">Поиск</Button>
+                                    <Grid Grid.Column="1" Margin="5,0,0,10">
+                                        <Button Command="{Binding DelegateCommand}" Foreground="{StaticResource SocketGreyBrush}" Background="#cccccc" FontWeight="DemiBold" FontSize="16">Поиск</Button>
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -54,30 +55,124 @@
                                     <DataTemplate>
                                         <Grid>
                                             <Border Background="{StaticResource SocketBlueBrush}" Margin="5">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="auto"/>
                                                         <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid>
-                                                    <Label Content="{Binding FirstName}"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid>
+                                                        <Label Content="{Binding FirstName}"/>
+                                                    </Grid>
                                                 </Grid>
-                                            </Grid>
-                                        </Border>
+                                            </Border>
                                         </Grid>
-                                        
+
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
                         </ScrollViewer>
                     </Grid>
-                    <Grid Grid.Row="2">
-
+                    <Grid Grid.Row="2" Background="#f5f5f5">
+                        <Grid MaxHeight="60" Margin="20,0,20,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" Margin="0,0,5,10">
+                                <Label VerticalAlignment="Center"  Foreground="#434343" FontWeight="Bold" FontSize="16">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding TrainigDate}"/>
+                                        <TextBlock xml:space="preserve"> - </TextBlock>
+                                        <TextBlock Text="{Binding TrainigType}"/>
+                                    </StackPanel>
+                                </Label>
+                            </Grid>
+                            <Grid Grid.Column="1" Margin="5,0,0,10">
+                                <Button Command="{Binding DelegateCommand}" Foreground="White" FontWeight="Bold" FontSize="16">
+                                    <Button.Background>
+                                        <LinearGradientBrush>
+                                            <GradientStop Color="{StaticResource SocketGreen}" Offset="0"/>
+                                            <GradientStop Color="{StaticResource SocketBlue}" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                    ОТМЕТИТЬСЯ
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" DataContext="{Binding TrialTrainingDataContext}">
+                <Grid.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="{StaticResource SocketGreen}" Offset="0"/>
+                        <GradientStop Color="{StaticResource SocketBlue}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid>
 
+                        <StackPanel VerticalAlignment="Center" MaxWidth="340" HorizontalAlignment="Center" Grid.RowSpan="2">
+                            <Label FontWeight="Bold" Foreground="White" FontSize="25" Margin="0,0,0,50">
+                                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+                                ИЛИ ПРОЙДИТЕ ПРОБНУЮ ТРЕНИРОВКУ
+                                </TextBlock>
+                            </Label>
+                            <TextBox Tag="Имя" Text="{Binding FirstName}" Padding="15" FontWeight="Bold" Foreground="{StaticResource SocketGreyBrush}" FontSize="15" Margin="0,0,0,20"/>
+                            <TextBox Tag="Фамилия" Text="{Binding MidleName}" Padding="15" FontWeight="Bold" Foreground="{StaticResource SocketGreyBrush}" FontSize="15"  Margin="0,0,0,20"/>
+                            <TextBox Tag="Отчество (-)" Text="{Binding LastName}" Padding="15" FontWeight="Bold" Foreground="{StaticResource SocketGreyBrush}" FontSize="15"  Margin="0,0,0,20"/>
+                            <TextBox Tag="Номер телефона" Text="{Binding PhoneNumber}" Padding="15" FontWeight="Bold" Foreground="{StaticResource SocketGreyBrush}" FontSize="15"  Margin="0,0,0,20"/>
+                            <TextBox Tag="Электронная почта (-)" Text="{Binding Email}" Padding="15" FontWeight="Bold" Foreground="{StaticResource SocketGreyBrush}" FontSize="15"  Margin="0,0,0,20"/>
+                            <Button MaxWidth="200" Command="{Binding CreateTrialTraining}" Padding="15" FontSize="14" FontWeight="Bold"  Margin="0,30,0,0" Opacity="0.85">
+                                <Button.Background>
+                                    <LinearGradientBrush>
+                                        <GradientStop Color="#FFFA5457" Offset="0"/>
+                                        <GradientStop Color="#FFFA8925" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                                <Button.Foreground>
+                                    <SolidColorBrush Color="White"/>
+                                </Button.Foreground>
+                                ОК
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="2" Background="White">
+                <StackPanel>
+                    <Grid Margin="0,30,0,0">
+                        <Ellipse Height="180" Width="180" Fill="{StaticResource SocketOrangeBrush}">
+                            
+                        </Ellipse>
+                        <TextBlock Text="{Binding PresentUserCount}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Black" FontSize="100" Height="114" Margin="126,24,126,42"/>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                        <TextBlock Foreground="#434343" FontWeight="Bold" FontSize="15" xml:space="preserve" Text="из "/>
+                        <TextBlock Foreground="#434343" FontWeight="Bold" FontSize="15"  Text="{Binding UserCount}"/>
+                        <TextBlock Foreground="#434343" FontWeight="Bold" FontSize="15" xml:space="preserve" Text=" человек"/>
+                    </StackPanel>
+                    <TextBlock Foreground="#434343" FontWeight="Bold" FontSize="15"  HorizontalAlignment="Center">уже с нами</TextBlock>
+                    <Grid>
+
+                    </Grid>
+                    <Label HorizontalAlignment="Center" Margin="0,40,0,0" FontSize="17">
+                        <Hyperlink Command="{Binding CheckAttendance}">
+                            Проверить посещаемость
+                        </Hyperlink>
+                    </Label>
+
+                    <Label HorizontalAlignment="Center" Margin="0,20,0,0" FontSize="17">
+                        <Hyperlink Command="{Binding LogOut}">
+                            Выход
+                        </Hyperlink>
+                    </Label>
+                </StackPanel>
             </Grid>
         </Grid>
     </Grid>
