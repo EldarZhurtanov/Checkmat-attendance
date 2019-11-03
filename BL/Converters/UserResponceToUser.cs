@@ -10,8 +10,9 @@ namespace BL.Converters
             {
                 Id = userResponce.id,
                 Presence = userResponce.presence == 0 ? Presence.absent : Presence.present,
-                FirstName = userResponce.midleName,
-                MidleName = userResponce.midleName
+                FirstName = userResponce.lastName,
+                MidleName = userResponce.midleName,
+                CardNumber = userResponce.cardNumber
             };
         }
 

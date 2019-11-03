@@ -1,4 +1,5 @@
 ﻿using BL;
+using CheckmatAttendance.ViewModels.Helpers;
 using DevExpress.Mvvm;
 using Egor92.UINavigation.Wpf;
 using System.Collections.ObjectModel;
@@ -82,7 +83,7 @@ namespace CheckmatAttendance.ViewModels
 
             }, () => SelectedAbsentUser != null);
 
-            ComeBack = new DelegateCommand(() => _navigationManager.Navigate("UserMaker"));
+            ComeBack = new DelegateCommand(() => _navigationManager.Navigate(NavigationHelper.GetKey(PageType.UserMaker, KeyType.Last)));
         }
     }
 }

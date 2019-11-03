@@ -10,10 +10,10 @@ namespace DL.DataProviders
         {
             new UserResponce { role = "trainer", id = 1},
             new UserResponce { role = "admin", id = 2 },
-            new UserResponce { role = "client", id = 10, groupId = 1, presence = 0, lastName = "Абубакир", midleName = "Абдулов" },
-            new UserResponce { role = "client", id = 11, groupId = 1, presence = 0, lastName = "Станислав ", midleName = "Медведев"  },
-            new UserResponce { role = "client", id = 12, groupId = 1, presence = 1, lastName = "Роман ", midleName = "Петров"  },
-            new UserResponce { role = "client", id = 13, groupId = 1, presence = 2, lastName = "Костя ", midleName = "Панов"  },
+            new UserResponce { role = "client", id = 10, groupId = 1, presence = 0, lastName = "Абубакир", midleName = "Абдулов", cardNumber = "1231231231" },
+            new UserResponce { role = "client", id = 11, groupId = 1, presence = 0, lastName = "Станислав ", midleName = "Медведев", cardNumber = "2231231231"  },
+            new UserResponce { role = "client", id = 12, groupId = 1, presence = 1, lastName = "Роман ", midleName = "Петров", cardNumber = "3231231231"  },
+            new UserResponce { role = "client", id = 13, groupId = 1, presence = 2, lastName = "Костя ", midleName = "Панов", cardNumber = "4231231231"  },
         };
 
         public override UserResponce Auth(string login, string password)

@@ -22,9 +22,9 @@ namespace CheckmatAttendance.ViewModels.Helpers
 
         private static bool IsMatch(this User user, string searchString)
         {
-            return user.CardNumber.Contains(searchString)
-                || user.FirstName.Contains(searchString)
-                || user.MidleName.Contains(searchString);
+            return user.CardNumber.ToLower().Contains(searchString.ToLower())
+                || user.FirstName.ToLower().Contains(searchString.ToLower())
+                || user.MidleName.ToLower().Contains(searchString.ToLower());
         }
     }
 }

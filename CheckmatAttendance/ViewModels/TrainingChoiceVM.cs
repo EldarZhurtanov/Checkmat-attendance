@@ -8,6 +8,7 @@ using Egor92.UINavigation.Wpf;
 using BL;
 using System.Collections.ObjectModel;
 using CheckmatAttendance.Views;
+using CheckmatAttendance.ViewModels.Helpers;
 
 namespace CheckmatAttendance.ViewModels
 {
@@ -68,13 +69,15 @@ namespace CheckmatAttendance.ViewModels
 
             ChoiceTrainingCommand = new DelegateCommand(() =>
             {
+                string userMakerKey = NavigationHelper.GetKey(PageType.UserMaker, KeyType.New);
 
-                _navigationService.Register<UserMarker>("UserMaker", () => new UserMarkerVM(_navigationService, (from t
-                                                                                                                  in _trainings
-                                                                                                                  where t.TrainingDate == SelectedDate
-                                                                                                                  && t.TrainingType == SelectedTrainingType
-                                                                                                                  select t).FirstOrDefault()));
-                _navigationService.Navigate("UserMaker");
+                _navigationService.Register<UserMarker>(userMakerKey, () => new UserMarkerVM(_navigationService, (from t
+                                                                                                                     in _trainings
+                                                                                                                 where t.TrainingDate == SelectedDate
+                                                                                                                 && t.TrainingType == SelectedTrainingType
+                                                                                                                 select t).FirstOrDefault()));
+                _navigationService.Navigate(userMakerKey);
+                
 
             }, () =>
             {

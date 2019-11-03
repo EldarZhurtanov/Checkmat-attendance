@@ -5,9 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CheckmatAttendance.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="765" d:DesignWidth="1115">
+             d:DesignHeight="865" d:DesignWidth="1435">
     <Grid>
-        <Image Margin="-1215,48,1183,53" Source="/CheckmatAttendance;component/3.PNG" Stretch="Fill"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="14*"/>
@@ -31,17 +30,16 @@
                                 НАЙДИТЕ СЕБЯ
                             </Label>
                             <Grid Grid.Row="1">
-                                <Grid MaxHeight="55" Margin="20,0,20,10">
+                                <Grid MaxHeight="65" Margin="20,0,20,10">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="494*"/>
                                         <ColumnDefinition Width="145*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid Grid.Column="0" Margin="0,0,5,10">
-                                        <TextBox Padding="15" Background="#e0e0e0" FontWeight="DemiBold" Tag="ФИО или Номер карты">
-                                        </TextBox>
+                                        <TextBox Text="{Binding SearchString}" FontSize="18" Padding="15" Background="#e0e0e0" FontWeight="DemiBold" Tag="ФИО или Номер карты"/>
                                     </Grid>
                                     <Grid Grid.Column="1" Margin="5,0,0,10">
-                                        <Button Command="{Binding DelegateCommand}" Foreground="{StaticResource SocketGreyBrush}" Background="#cccccc" FontWeight="DemiBold" FontSize="16">Поиск</Button>
+                                        <Button Command="{Binding Search}" Foreground="{StaticResource SocketGreyBrush}" Background="#cccccc" FontWeight="DemiBold" FontSize="16">Поиск</Button>
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -50,26 +48,33 @@
                     </Grid>
                     <Grid Grid.Row="1">
                         <ScrollViewer Background="#f5f5f5">
-                            <ListBox SelectedItem="{Binding SelectedUser}" ItemsSource="{Binding Users}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Border Background="{StaticResource SocketBlueBrush}" Margin="5">
+                            <StackPanel>
+                                <ListBox Background="Transparent" BorderBrush="Transparent" SelectedItem="{Binding SelectedUser}" ItemsSource="{Binding Users}" HorizontalContentAlignment="Stretch">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="{StaticResource SocketBlueBrush}" CornerRadius="13" Margin="15,8">
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="1*"/>
                                                         <ColumnDefinition Width="auto"/>
-                                                        <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Grid>
-                                                        <Label Content="{Binding FirstName}"/>
-                                                    </Grid>
+                                                    <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="18,10,10,10">
+                                                        <TextBlock Text="{Binding FirstName}" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White"/>
+                                                        <TextBlock xml:space="preserve" Text=" "/>
+                                                        <TextBlock Text="{Binding MidleName}" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White"/>
+                                                    </StackPanel>
+                                                    <Border Grid.Column="1" Background="{StaticResource SocketRedBrush}" CornerRadius="13">
+                                                        <TextBlock Margin="15,0" Text="{Binding CardNumber}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold" Foreground="White">
+
+                                                        </TextBlock>
+                                                    </Border>
                                                 </Grid>
                                             </Border>
-                                        </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
 
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
                         </ScrollViewer>
                     </Grid>
                     <Grid Grid.Row="2" Background="#f5f5f5">
@@ -79,16 +84,16 @@
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0" Margin="0,0,5,10">
-                                <Label VerticalAlignment="Center"  Foreground="#434343" FontWeight="Bold" FontSize="16">
+                                <Label VerticalAlignment="Center"  Foreground="#434343" FontWeight="Bold" FontSize="20">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding TrainigDate}"/>
-                                        <TextBlock xml:space="preserve"> - </TextBlock>
+                                        <TextBlock xml:space="preserve"> -</TextBlock>
                                         <TextBlock Text="{Binding TrainigType}"/>
                                     </StackPanel>
                                 </Label>
                             </Grid>
                             <Grid Grid.Column="1" Margin="5,0,0,10">
-                                <Button Command="{Binding DelegateCommand}" Foreground="White" FontWeight="Bold" FontSize="16">
+                                <Button Command="{Binding MarkUser}" Foreground="White" FontWeight="Bold" FontSize="16">
                                     <Button.Background>
                                         <LinearGradientBrush>
                                             <GradientStop Color="{StaticResource SocketGreen}" Offset="0"/>
@@ -148,7 +153,7 @@
                 <StackPanel>
                     <Grid Margin="0,30,0,0">
                         <Ellipse Height="180" Width="180" Fill="{StaticResource SocketOrangeBrush}">
-                            
+
                         </Ellipse>
                         <TextBlock Text="{Binding PresentUserCount}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Black" FontSize="100" Height="114" Margin="126,24,126,42"/>
                     </Grid>

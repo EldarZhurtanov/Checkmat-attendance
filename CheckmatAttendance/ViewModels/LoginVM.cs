@@ -8,6 +8,7 @@ using Egor92.UINavigation.Abstractions;
 using BL;
 using Egor92.UINavigation.Wpf;
 using CheckmatAttendance.Views;
+using CheckmatAttendance.ViewModels.Helpers;
 
 namespace CheckmatAttendance.ViewModels
 {
@@ -39,8 +40,10 @@ namespace CheckmatAttendance.ViewModels
                         Error ="У вас нет занятий";
                     else
                     {
-                        _navigationManager.Register<TrainingChioce>("TrainingChoice", () => new TrainingChoiceVM(navigationManager, trainings.ToList()));
-                        _navigationManager.Navigate("TrainingChoice");
+                        string trainingChoiceKey = NavigationHelper.GetKey(PageType.TrainingChoice, KeyType.New);
+
+                        _navigationManager.Register<TrainingChioce>(trainingChoiceKey, () => new TrainingChoiceVM(navigationManager, trainings.ToList()));
+                        _navigationManager.Navigate(trainingChoiceKey);
                     }
                 }
                 catch (Exception ex)

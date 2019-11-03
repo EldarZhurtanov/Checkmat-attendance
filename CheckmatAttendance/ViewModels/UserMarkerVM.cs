@@ -59,11 +59,19 @@ namespace CheckmatAttendance.ViewModels
 
             CheckAttendance = new DelegateCommand(() =>
                 {
-                    _navigationService.Register<AttendaceChecker>("AttendaceChecker", () => new AttendaceCheckerVM(_navigationService, _training));
-                    _navigationService.Navigate("AttendaceChecker");
+                    string attendaceCheckerKey = NavigationHelper.GetKey(PageType.AttendanceCheker, KeyType.New);
+
+                    _navigationService.Register<AttendaceChecker>(attendaceCheckerKey, () => new AttendaceCheckerVM(_navigationService, _training));
+                    _navigationService.Navigate(attendaceCheckerKey);
                 });
 
-            LogOut = new DelegateCommand(() => _navigationService.Navigate("Login"));
+            LogOut = new DelegateCommand(() => 
+            {
+                string loginKey = NavigationHelper.GetKey(PageType.Login, KeyType.New);
+
+                _navigationService.Register<Login>(loginKey, () => new LoginVM(_navigationService));
+                _navigationService.Navigate(loginKey);
+            });
         }
     }
 }

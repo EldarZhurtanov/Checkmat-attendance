@@ -8,5 +8,6 @@
         public int presence;
         public string lastName;
         public string midleName;
+        public string cardNumber;
     }
 }
