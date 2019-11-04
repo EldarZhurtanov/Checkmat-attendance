@@ -7,14 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="865" d:DesignWidth="1435">
     <Grid>
-        <Grid>
+        <Grid x:Name="MainGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="14*"/>
-                <ColumnDefinition Width="0*"/>
                 <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <Grid>
+                <Grid Name="SearchGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="226*"/>
                         <RowDefinition Height="440*"/>
@@ -36,23 +36,51 @@
                                         <ColumnDefinition Width="145*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid Grid.Column="0" Margin="0,0,5,10">
-                                        <TextBox Text="{Binding SearchString}" FontSize="18" Padding="15" Background="#e0e0e0" FontWeight="DemiBold" Tag="ФИО или Номер карты"/>
+                                        <TextBox Text="{Binding SearchString}" FontSize="18" Padding="15" Foreground="DarkSlateGray" Background="#e0e0e0" FontWeight="DemiBold" Tag="ФИО или Номер карты"/>
                                     </Grid>
                                     <Grid Grid.Column="1" Margin="5,0,0,10">
-                                        <Button Command="{Binding Search}" Foreground="{StaticResource SocketGreyBrush}" Background="#cccccc" FontWeight="DemiBold" FontSize="16">Поиск</Button>
+                                        <Button Command="{Binding Search}"  Foreground="DarkSlateGray" Background="#cccccc" FontWeight="DemiBold" FontSize="18">Поиск</Button>
                                     </Grid>
                                 </Grid>
                             </Grid>
 
                         </Grid>
                     </Grid>
-                    <Grid Grid.Row="1">
-                        <ScrollViewer Background="#f5f5f5">
+                    <Grid Grid.Row="1"  Background="#f5f5f5">
+                        <ScrollViewer>
                             <StackPanel>
                                 <ListBox Background="Transparent" BorderBrush="Transparent" SelectedItem="{Binding SelectedUser}" ItemsSource="{Binding Users}" HorizontalContentAlignment="Stretch">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListBoxItem}">
+                                            <Setter Property="Background" Value="#69ab64"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate x:Name="item" TargetType="{x:Type ListBoxItem}">
+                                                        <Border x:Name="brd" Background="{StaticResource SocketBlueBrush}" CornerRadius="13" Margin="15,8">
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                    <ColumnDefinition Width="1*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <RadioButton MaxWidth="30" Grid.Column="0" Style="{DynamicResource RadioButtonStyle}" Margin="15,0" VerticalAlignment="Center" Focusable="False" Foreground="{TemplateBinding Foreground}"
+                                                                IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}"/>
+
+                                                                <ContentPresenter Grid.Column="1"/>
+                                                            </Grid>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsSelected" Value="True">
+                                                                <Setter TargetName="brd" Property="Background" Value="#31b8a7"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <Border Background="{StaticResource SocketBlueBrush}" CornerRadius="13" Margin="15,8">
+
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="1*"/>
@@ -63,18 +91,28 @@
                                                         <TextBlock xml:space="preserve" Text=" "/>
                                                         <TextBlock Text="{Binding MidleName}" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White"/>
                                                     </StackPanel>
-                                                    <Border Grid.Column="1" Background="{StaticResource SocketRedBrush}" CornerRadius="13">
+                                                    <Border Grid.Column="1" CornerRadius="13">
+                                                        <Border.Style>
+                                                            <Style TargetType="Border">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding Path=Presence}" Value="1">
+                                                                        <Setter Property="Background" Value="#5fa55a"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Path=Presence}" Value="0">
+                                                                        <Setter Property="Background" Value="#fa5457"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
                                                         <TextBlock Margin="15,0" Text="{Binding CardNumber}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold" Foreground="White">
-
                                                         </TextBlock>
                                                     </Border>
                                                 </Grid>
-                                            </Border>
+
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>
                             </StackPanel>
-
                         </ScrollViewer>
                     </Grid>
                     <Grid Grid.Row="2" Background="#f5f5f5">
@@ -107,7 +145,7 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid Grid.Column="1" DataContext="{Binding TrialTrainingDataContext}">
+            <Grid Name="TrialMenu" Grid.Column="1" DataContext="{Binding TrialTrainingDataContext}">
                 <Grid.Background>
                     <LinearGradientBrush>
                         <GradientStop Color="{StaticResource SocketGreen}" Offset="0"/>
@@ -127,11 +165,11 @@
                                 ИЛИ ПРОЙДИТЕ ПРОБНУЮ ТРЕНИРОВКУ
                                 </TextBlock>
                             </Label>
-                            <TextBox Tag="Имя" Text="{Binding FirstName}" Padding="15" FontWeight="Bold" Foreground="{StaticResource SocketGreyBrush}" FontSize="15" Margin="0,0,0,20"/>
-                            <TextBox Tag="Фамилия" Text="{Binding MidleName}" Padding="15" FontWeight="Bold" Foreground="{StaticResource SocketGreyBrush}" FontSize="15"  Margin="0,0,0,20"/>
-                            <TextBox Tag="Отчество (-)" Text="{Binding LastName}" Padding="15" FontWeight="Bold" Foreground="{StaticResource SocketGreyBrush}" FontSize="15"  Margin="0,0,0,20"/>
-                            <TextBox Tag="Номер телефона" Text="{Binding PhoneNumber}" Padding="15" FontWeight="Bold" Foreground="{StaticResource SocketGreyBrush}" FontSize="15"  Margin="0,0,0,20"/>
-                            <TextBox Tag="Электронная почта (-)" Text="{Binding Email}" Padding="15" FontWeight="Bold" Foreground="{StaticResource SocketGreyBrush}" FontSize="15"  Margin="0,0,0,20"/>
+                            <TextBox Tag="Имя" Text="{Binding FirstName}" Padding="15" FontWeight="Bold" Foreground="DarkSlateGray" FontSize="15" Margin="0,0,0,20"></TextBox>
+                            <TextBox Tag="Фамилия" Text="{Binding MidleName}" Padding="15" FontWeight="Bold" Foreground="DarkSlateGray" FontSize="15"  Margin="0,0,0,20"/>
+                            <TextBox Tag="Отчество (-)" Text="{Binding LastName}" Padding="15" FontWeight="Bold" Foreground="DarkSlateGray" FontSize="15"  Margin="0,0,0,20"/>
+                            <TextBox Tag="Номер телефона" Text="{Binding PhoneNumber}" Padding="15" FontWeight="Bold" Foreground="DarkSlateGray" FontSize="15"  Margin="0,0,0,20"/>
+                            <TextBox Tag="Электронная почта (-)" Text="{Binding Email}" Padding="15" FontWeight="Bold" Foreground="DarkSlateGray" FontSize="15"  Margin="0,0,0,20"/>
                             <Button MaxWidth="200" Command="{Binding CreateTrialTraining}" Padding="15" FontSize="14" FontWeight="Bold"  Margin="0,30,0,0" Opacity="0.85">
                                 <Button.Background>
                                     <LinearGradientBrush>
@@ -146,11 +184,30 @@
                             </Button>
                         </StackPanel>
                     </Grid>
-
+                    <Border Grid.Row="1" HorizontalAlignment="Right" Margin="10" Background="White" CornerRadius="40">
+                        <Grid MinHeight="50" MinWidth="50">
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                <Hyperlink Click="OpenMenuHyperlink_Click" x:Name="OpenMenuHyperlink" TextDecorations="None" Foreground="{StaticResource SocketGreyBrush}">
+                                    <TextBlock TextAlignment="Center" FontSize="30" RenderTransformOrigin="0.5,0.5" Height="34">
+                                        <TextBlock.RenderTransform>
+                                            <TransformGroup>
+                                                <RotateTransform Angle="-180"/>
+                                            </TransformGroup>
+                                        </TextBlock.RenderTransform>
+                        ➜
+                                    </TextBlock>
+                                </Hyperlink>
+                            </Label>
+                        </Grid>
+                    </Border>
                 </Grid>
             </Grid>
-            <Grid Grid.Column="2" Background="White">
-                <StackPanel>
+            <Grid Name="HelpMenu" Grid.Column="1" Background="White" Width="0" HorizontalAlignment="Right">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
                     <Grid Margin="0,30,0,0">
                         <Ellipse Height="180" Width="180" Fill="{StaticResource SocketOrangeBrush}">
 
@@ -178,6 +235,17 @@
                         </Hyperlink>
                     </Label>
                 </StackPanel>
+                <Border Grid.Row="1" HorizontalAlignment="Right" Margin="10" Background="#f5f5f5" CornerRadius="40">
+                    <Grid MinHeight="50" MinWidth="50">
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            <Hyperlink Click="CloseMenuHyperlink_Click" x:Name="CloseMenuHyperlink" TextDecorations="None" Foreground="{StaticResource SocketGreyBrush}">
+                                <TextBlock TextAlignment="Center" FontSize="30">
+                        ➜
+                                </TextBlock>
+                            </Hyperlink>
+                        </Label>
+                    </Grid>
+                </Border>
             </Grid>
         </Grid>
     </Grid>

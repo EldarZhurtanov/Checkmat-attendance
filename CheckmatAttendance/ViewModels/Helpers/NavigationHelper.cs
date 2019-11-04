@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CheckmatAttendance.ViewModels.Helpers
 {
@@ -55,11 +53,11 @@ namespace CheckmatAttendance.ViewModels.Helpers
                     case PageType.Login:
                         return _loginKeys.LastOrDefault();
                     case PageType.AttendanceCheker:
-                        return _loginKeys.LastOrDefault();
+                        return _attendanceCheckerKeys.LastOrDefault();
                     case PageType.TrainingChoice:
-                        return _loginKeys.LastOrDefault();
+                        return _trainingChoiceKeys.LastOrDefault();
                     case PageType.UserMaker:
-                        return _loginKeys.LastOrDefault();
+                        return _UserMakerKeys.LastOrDefault();
                 }
                 return null;
             }

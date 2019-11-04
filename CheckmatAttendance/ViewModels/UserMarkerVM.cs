@@ -1,14 +1,10 @@
 ﻿using BL;
-using DevExpress.Mvvm;
-using Egor92.UINavigation.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CheckmatAttendance.ViewModels.Helpers;
 using CheckmatAttendance.Views;
+using DevExpress.Mvvm;
+using Egor92.UINavigation.Wpf;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace CheckmatAttendance.ViewModels
 {
@@ -29,7 +25,7 @@ namespace CheckmatAttendance.ViewModels
             set
             {
                 _searchString = value;
-                RaisePropertiesChanged("SearchString", "Users");
+              //  RaisePropertiesChanged("SearchString", "Users");
             }
         }
         public int PresentUserCount { get => _users.ToList().FindAll((user) => user.Presence == Presence.present).Count; }
@@ -47,7 +43,7 @@ namespace CheckmatAttendance.ViewModels
             _navigationService = navigationService;
             _training = training;
 
-            Search = new DelegateCommand(() => SearchString = _searchString, () => _searchString != null && _searchString != string.Empty);
+            Search = new DelegateCommand(() => SearchString = _searchString);
 
             MarkUser = new DelegateCommand(() => 
             {

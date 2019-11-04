@@ -1,6 +1,5 @@
 ﻿using BL;
 using DevExpress.Mvvm;
-using Egor92.UINavigation.Wpf;
 
 namespace CheckmatAttendance.ViewModels
 {

@@ -56,9 +56,9 @@ namespace CheckmatAttendance.ViewModels
             }
         }
 
-        public DelegateCommand ComeBack;
-        public DelegateCommand FromPresentToAbsent;
-        public DelegateCommand FromAbsentToPresent;
+        public DelegateCommand ComeBack { get; }
+        public DelegateCommand FromPresentToAbsent { get; }
+        public DelegateCommand FromAbsentToPresent { get; }
 
         public AttendaceCheckerVM(NavigationManager navigationService, Training training)
         {
@@ -76,14 +76,14 @@ namespace CheckmatAttendance.ViewModels
 
             FromAbsentToPresent = new DelegateCommand(() =>
             {
-                _training.TagUser(SelectedPresentUser, Presence.present);
+                _training.TagUser(SelectedAbsentUser, Presence.present);
                 SelectedAbsentUser = null;
 
                 RaisePropertiesChanged("PresentUsers", "AbsentUsers");
 
             }, () => SelectedAbsentUser != null);
 
-            ComeBack = new DelegateCommand(() => _navigationManager.Navigate(NavigationHelper.GetKey(PageType.UserMaker, KeyType.Last)));
+            ComeBack = new DelegateCommand(() =>  _navigationManager.Navigate(NavigationHelper.GetKey(PageType.UserMaker, KeyType.Last)));
         }
     }
 }

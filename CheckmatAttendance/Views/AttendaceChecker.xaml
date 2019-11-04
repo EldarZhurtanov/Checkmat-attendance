@@ -5,8 +5,252 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CheckmatAttendance.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="666" d:DesignWidth="1158.5">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="50" Background="{TemplateBinding Background}" BorderThickness="3" BorderBrush="{StaticResource SocketGreyBrush}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Border Width="30" Height="30" VerticalAlignment="Top" Grid.Row="0" HorizontalAlignment="Left" Margin="10" Background="#f5f5f5" CornerRadius="40" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="180"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Border.RenderTransform>
+            <Grid>
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <Hyperlink Command="{Binding ComeBack}" x:Name="CloseMenuHyperlink" TextDecorations="None" Foreground="{StaticResource SocketGreyBrush}">
+                        <TextBlock VerticalAlignment="Center" TextAlignment="Center" FontSize="20">
+                        ➜
+                        </TextBlock>
+                    </Hyperlink>
+                </Label>
+            </Grid>
+        </Border>
+        <Label Margin="0,30,0,30" HorizontalAlignment="Center" FontSize="35" Foreground="{StaticResource SocketGreyBrush}">
+            ПОСЕЩАЕМОСТЬ
+        </Label>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Border CornerRadius="40" Background="#8fbf8b" Margin="30,0,5,30">
+                    <StackPanel>
+                        <Label Margin="0,15,0,10" HorizontalAlignment="Center" FontWeight="Bold" FontSize="35" Foreground="White">
+                            Присутсвуют
+                        </Label>
+                        <ScrollViewer>
+
+                            <ListBox Background="Transparent" AlternationCount="2" BorderThickness="0" ItemsSource="{Binding PresentUsers}" SelectedItem="{Binding SelectedPresentUser}">
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListBoxItem}">
+                                        <Setter Property="Background" Value="#69ab64"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                                    <Border x:Name="brd" Background="{TemplateBinding Background}">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="auto"/>
+                                                                <ColumnDefinition Width="1*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <RadioButton MaxWidth="30" Grid.Column="0" Style="{DynamicResource RadioButtonStyle}" Margin="15,0" VerticalAlignment="Center" Focusable="False" Foreground="{TemplateBinding Foreground}"
+                                                                IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}"/>
+
+                                                            <ContentPresenter Grid.Column="1" Margin="{TemplateBinding Padding}"/>
+                                                        </Grid>
+
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                                            <Setter Property="Background" Value="#699e66"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsSelected" Value="True">
+                                                            <Setter Property="Background" Value="#658a57"/>
+                                                            <Setter Property="Foreground" Value="#b4c6b4"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Orientation="Horizontal" Margin="5,10">
+                                                <Label FontSize="20" Foreground="White" FontWeight="Bold">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding FirstName}"/>
+                                                        <TextBlock xml:space="preserve" Text=" "/>
+                                                        <TextBlock Text="{Binding MidleName}"/>
+                                                    </StackPanel>
+                                                </Label>
+                                            </StackPanel>
+                                            <Label Grid.Column="1" VerticalAlignment="Center" FontSize="20" Foreground="White" FontWeight="Bold">
+                                                <TextBlock  Text="{Binding CardNumber}"/>
+
+                                            </Label>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <Grid Grid.Column="1">
+                <StackPanel VerticalAlignment="Center">
+                    <Grid>
+                        <Button Command="{Binding FromPresentToAbsent}" Width="60" Height="60">
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
+                                <TextBlock Foreground="{StaticResource SocketGreyBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="25" Height="37">
+                        ➜
+                                </TextBlock>
+                            </Label>
+                        </Button>
+
+                    </Grid>
+                    <Grid Margin="5,25">
+                        <Button Command="{Binding FromAbsentToPresent}" Width="60" Height="60" >
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
+                                <Label.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="180"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Label.RenderTransform>
+                                <TextBlock Foreground="{StaticResource SocketGreyBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="25" Height="36">
+                        ➜
+                                </TextBlock>
+                            </Label>
+                        </Button>
+                        
+                    </Grid>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Border CornerRadius="40" Background="#fbac67" Margin="5,0,30,30">
+                    <StackPanel>
+                        <Label Margin="0,15,0,10" HorizontalAlignment="Center" FontWeight="Bold" FontSize="35" Foreground="White">
+                            Присутсвуют
+                        </Label>
+                        <ScrollViewer>
+                            <ListBox Background="Transparent" AlternationCount="2" BorderThickness="0" ItemsSource="{Binding AbsentUsers}" SelectedItem="{Binding SelectedAbsentUser}">
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListBoxItem}">
+                                        <Setter Property="Background" Value="#fa8f31"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                                    <Border x:Name="brd" Background="{TemplateBinding Background}">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="auto"/>
+                                                                <ColumnDefinition Width="1*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <RadioButton MaxWidth="30" Grid.Column="0" Style="{DynamicResource RadioButtonStyle}" Margin="15,0" VerticalAlignment="Center" Focusable="False" Foreground="{TemplateBinding Foreground}"
+                                                                IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}"/>
+
+                                                            <ContentPresenter Grid.Column="1" Margin="{TemplateBinding Padding}"/>
+                                                        </Grid>
+
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                                            <Setter Property="Background" Value="#ea7e1c"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsSelected" Value="True">
+                                                            <Setter Property="Background" Value="#cd7221"/>
+                                                            <Setter Property="Foreground" Value="#b4c6b4"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Orientation="Horizontal" Margin="5,10">
+                                                <Label FontSize="20" Foreground="White" FontWeight="Bold">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding FirstName}"/>
+                                                        <TextBlock xml:space="preserve" Text=" "/>
+                                                        <TextBlock Text="{Binding MidleName}"/>
+                                                    </StackPanel>
+                                                </Label>
+                                            </StackPanel>
+                                            <Label Grid.Column="1" VerticalAlignment="Center" FontSize="20" Foreground="White" FontWeight="Bold">
+                                                <TextBlock  Text="{Binding CardNumber}"/>
+
+                                            </Label>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

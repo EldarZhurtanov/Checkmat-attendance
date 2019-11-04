@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -27,5 +28,34 @@ namespace CheckmatAttendance.Views
             InitializeComponent();
         }
 
+        private void OpenMenuHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            var animation1 = new DoubleAnimation();
+            animation1.From = 0;
+            animation1.To = TrialMenu.ActualWidth;
+            animation1.Duration = TimeSpan.FromSeconds(0.2);
+            Storyboard.SetTarget(animation1, HelpMenu);
+            Storyboard.SetTargetProperty(animation1, new PropertyPath(WidthProperty));
+
+            var storyboard = new Storyboard();
+            storyboard.Children = new TimelineCollection { animation1 };
+
+            storyboard.Begin();
+        }
+
+        private void CloseMenuHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            var animation1 = new DoubleAnimation();
+            animation1.From = TrialMenu.ActualWidth;
+            animation1.To = 0;
+            animation1.Duration = TimeSpan.FromSeconds(0.2);
+            Storyboard.SetTarget(animation1, HelpMenu);
+            Storyboard.SetTargetProperty(animation1, new PropertyPath(WidthProperty));
+
+            var storyboard = new Storyboard();
+            storyboard.Children = new TimelineCollection { animation1 };
+
+            storyboard.Begin();
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using BL.Converters;
-using DL;
 using DL.DataProviders;
 using System;
 using System.Collections.ObjectModel;
@@ -38,12 +37,14 @@ namespace BL
 
         public void TagUser(User user, Presence presence)
         {
+            if (user.Presence != presence)
+            {
+                _dataProvider.MarkUser(user.Id, Convert.ToBoolean((int)presence));
 
-            _dataProvider.MarkUser(user.Id, Convert.ToBoolean((int)presence));
-
-            Users.Remove(user);
-            user.Presence = presence;
-            Users.Add(user);
+                Users.Remove(user);
+                user.Presence = presence;
+                Users.Add(user);
+            }
         }
         public void SignUpForATrialTraining(TrialUser trialUser)
         {

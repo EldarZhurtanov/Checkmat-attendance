@@ -1,14 +1,11 @@
-﻿using DevExpress.Mvvm;
+﻿using BL;
+using CheckmatAttendance.ViewModels.Helpers;
+using CheckmatAttendance.Views;
+using DevExpress.Mvvm;
+using Egor92.UINavigation.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Egor92.UINavigation.Wpf;
-using BL;
-using System.Collections.ObjectModel;
-using CheckmatAttendance.Views;
-using CheckmatAttendance.ViewModels.Helpers;
 
 namespace CheckmatAttendance.ViewModels
 {

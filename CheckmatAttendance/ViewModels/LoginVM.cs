@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DevExpress.Mvvm;
-using Egor92.UINavigation.Abstractions;
-using BL;
-using Egor92.UINavigation.Wpf;
-using CheckmatAttendance.Views;
+﻿using BL;
 using CheckmatAttendance.ViewModels.Helpers;
+using CheckmatAttendance.Views;
+using DevExpress.Mvvm;
+using Egor92.UINavigation.Wpf;
+using System;
+using System.Linq;
 
 namespace CheckmatAttendance.ViewModels
 {
@@ -53,7 +49,8 @@ namespace CheckmatAttendance.ViewModels
             });
         }
 
-        public string Login { get; set; }
+        public string Login { get;
+            set; }
         public string Error { get; set; }
         public DelegateCommand LoginCommand { get; }
 
