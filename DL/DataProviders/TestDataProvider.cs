@@ -36,9 +36,9 @@ namespace DL.DataProviders
             if (GetUser(trainerID).role == "trainer")
                 return new List<TrainingResponce>()
                 {
-                    new TrainingResponce {groupId = 1, trainingDate = DateTime.Now, trainingType = "Айкидо"},
-                    new TrainingResponce {groupId = 2, trainingDate = DateTime.Now, trainingType = "Дзюдо"},
-                    new TrainingResponce {groupId = 3, trainingDate = DateTime.Now.AddDays(-7), trainingType = "Дзюдо"}
+                    new TrainingResponce {groupId = 1, trainingDate = DateTime.Now, trainingType = "Джиу-Джитсу"},
+                    new TrainingResponce {groupId = 2, trainingDate = DateTime.Now, trainingType = "Грэпплинг"},
+                    new TrainingResponce {groupId = 3, trainingDate = DateTime.Now.AddDays(-7), trainingType = "Грэпплинг"}
                 };
             return null;
         }
